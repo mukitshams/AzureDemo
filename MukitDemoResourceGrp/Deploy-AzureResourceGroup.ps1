@@ -8,6 +8,8 @@ Param(
     [string] $StorageContainerName = $ResourceGroupName.ToLowerInvariant() + '-stageartifacts',
     [string] $TemplateFile = 'WebSiteSQLDatabase.json',
     [string] $TemplateParametersFile = 'WebSiteSQLDatabase.parameters.json',
+	[string] $VaultTemplateFile='SetKeyVault.json',
+	[string] $VaultTemplateparameterFile='SetKeyVault.parameters.json',
     [string] $ArtifactStagingDirectory = '.',
     [string] $DSCSourceFolder = 'DSC',
     [switch] $ValidateOnly
@@ -29,6 +31,8 @@ function Format-ValidationOutput {
 $OptionalParameters = New-Object -TypeName Hashtable
 $TemplateFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateFile))
 $TemplateParametersFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $TemplateParametersFile))
+$VaultTemplateFile= [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $VaultTemplateFile))
+$VaultTemplateparameterFile = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($PSScriptRoot, $VaultTemplateparameterFile))
 
 if ($UploadArtifacts) {
     # Convert relative paths to absolute paths if needed
@@ -107,8 +111,8 @@ if ($ValidateOnly) {
 else {
     #create key vault
 	New-AzureRmResourceGroupDeployment -Name ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm')) `
-	-ResourceGroupName $ResourceGroupName -TemplateFile "C:\DBA activity_ day_to_day\Azure SQl DB Building\MukitDemoResourceGrp\MukitDemoResourceGrp\SetKeyVault.json" `
-	-TemplateParameterFile "C:\DBA activity_ day_to_day\Azure SQl DB Building\MukitDemoResourceGrp\MukitDemoResourceGrp\SetKeyVault.parameters.json"
+	-ResourceGroupName $ResourceGroupName -TemplateFile $VaultTemplateFile `
+	-TemplateParameterFile $VaultTemplateparameterFile
 	
 	New-AzureRmResourceGroupDeployment -Name ((Get-ChildItem $TemplateFile).BaseName + '-' + ((Get-Date).ToUniversalTime()).ToString('MMdd-HHmm')) `
                                        -ResourceGroupName $ResourceGroupName `
