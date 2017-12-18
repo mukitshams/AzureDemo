@@ -1,0 +1,46 @@
+﻿{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "value": "mukitrmvault"
+        },
+        "tenantId": {
+            "value": "0e2ed455-96af-4100-bed3-a8e5fd981685"
+        },
+        "accessPolicies": {
+            "value": [
+                {
+                    "tenantId": "0e2ed455-96af-4100-bed3-a8e5fd981685",
+                    "objectId": "50d8f708-8642-4aaa-8290-6c426bc53a27",
+                    "permissions": {
+                        "keys": [ "all" ],
+                        "secrets": [ "all" ]
+                    }
+                },
+                {
+                    "tenantId": "0e2ed455-96af-4100-bed3-a8e5fd981685",
+                    "objectId": "50d8f708-8642-4aaa-8290-6c426bc53a27",
+                    "permissions": {
+                        "keys": [ "all" ],
+                        "secrets": [ "all" ]
+                    }
+                }
+            ]
+        },
+        "secretsObject": {
+            "value": {
+                "secrets": [
+                    {
+                        "secretName": "dbadmin",
+                        "secretValue": "TestOU123"
+                    },
+                    {
+                        "secretName": "storageadmin",
+                        "secretValue": "TestOUST123"
+                    }
+                ]
+            }
+        }
+    }
+}

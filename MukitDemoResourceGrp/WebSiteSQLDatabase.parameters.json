@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hostingPlanName": {
+            "value": "MukitDemoPlan"
+        },
+        "hstSrvname": {
+            "value": "mukitoutestsrv123"
+        },
+        "administratorLogin": {
+            "value": "dbadmin"
+        },
+        "databaseName": {
+            "value": "mukitoutestdb123"
+        },
+      "administratorLoginPassword": {
+        "reference": {
+            "keyVault": {
+                "id": "/subscriptions/76674240-0ffc-4f08-9dfc-c29b61f159a7/resourceGroups/MukitDemoResourceGrp/providers/Microsoft.KeyVault/vaults/mukitrmvault"
+            },
+          "secretName": "dbadmin"
+        }
+      },
+      "DempAppPackageFolder": {
+        "value": "DemoApp"
+      },
+      "DempAppPackageFileName": {
+        "value": "package.zip"
+      },
+      "_artifactsLocationSasToken": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/76674240-0ffc-4f08-9dfc-c29b61f159a7/resourceGroups/MukitDemoResourceGrp/providers/Microsoft.KeyVault/vaults/mukittestvault123"
+          },
+          "secretName": "dbadmin"
+        }
+      }
+    }
+}
